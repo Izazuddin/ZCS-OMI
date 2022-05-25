@@ -1,0 +1,341 @@
+<div class="card">
+    <div class="card-header d-flex">
+        <div class="ml-auto">
+            <button class="btn btn-sm btn-primary" (click)="onSubmit()">Submit</button>
+        </div>
+    </div>
+    <div class="alert alert-danger errorBox" *ngIf="errors && errors.length > 0">
+        <ul>
+            <li *ngFor="let error of errors"><label class="text-danger">{{error}}</label></li>
+        </ul>
+    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-4 heading1">
+            <label>Request Type:</label><br/>
+            <label>__Assesment</label><br/>
+            <label>__BAI Initial</label><br/>
+            <label>__BAI Modification</label><br/>
+        </div>
+        <div class="col-4">
+                        <img src="https://healthnewsillinois.com/wp-content/uploads/2021/04/Department-of-Healthcare-and-Family-Services-HFS-Logo.jpg" alt="HFS" style="width: 350px; height: 150px;">
+        </div>
+        <div class="col-4">
+            <div class="heading3-box">
+                    <p align="center">
+                        <b style="box-sizing: border-box;">Fee-for-Service Submittal Detail<br style="box-sizing: border-box;"></b>Forms should be submitted via email:<br style="box-sizing: border-box;"><a href="HFS.ABS@illinois.gov">HFS.ABS@illinois.gov</a>
+                    </p>
+                </div>
+        </div>
+    </div>
+    <p class="text-center bold">Prior Authorization for Adaptive Behavior Support (ABS) Services</p>
+    <div class="card">
+        <div class="card-header"><label class="capital">1.Recipient / Parent Information </label></div>
+        <div class="card-body">
+            <table border="1">
+                <tr>
+                    <td>
+                        <label class="label-sm">Recipient First and Last Name</label><app-info [info]="instruction.name"></app-info><br/>
+                        <div style="text-align:left">
+                            <input placeholder="Recipeint Name" type="text" [(ngModel)]="form.name" style="width: 240px">
+                        </div>
+                    </td>
+                    <td>
+                        <label class="label-sm">Date of Birth:</label><app-info [info]="instruction.dateofBirth"></app-info><br/>
+                        <input type="date">
+                    </td>
+                    <td colspan="2">
+                        <label class="label-sm">RIN:</label><app-info [info]="instruction.rinInfo"></app-info><br/>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">Phone Number:</label><app-info [info]="instruction.phoneNo"></app-info><br/>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-sm">Address:</label>
+                        <input type="text"><app-info [info]="instruction.addressInfo"></app-info>
+                    </td>
+                    <td>
+                        <label class="label-sm">City: </label>
+                        <input type="text"><app-info [info]="instruction.cityInfo"></app-info>
+                    </td>
+                    <td>
+                        <label class="label-sm">State:</label>
+                        <input type="text" style="width: 80px;"><app-info [info]="instruction.state"></app-info>
+                    </td>
+                    <td>
+                        <label class="label-sm">Zip Code:</label>
+                        <input type="text" style="width: 80px;"><app-info [info]="instruction.zipCode"></app-info>
+                    </td>
+                    <td>
+                        <label class="label-sm">Country:</label>
+                        <input type="text" style="width: 140px;">
+                    </td>
+                </tr>
+                    <tr>
+                    <td colspan="5">
+                        <div class="text-center">
+                        <label>Parent to Guardian Information</label>
+                    </div>
+                        <div class="d-flex">
+                        <label class="label-sm">Relationship to Recipient:</label>
+                        <section class="parentRelation">
+                        <mat-checkbox [(ngModel)]="form.relation.isParent">Parent</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="form.relation.isGuardian">Guardian</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="form.relation.isRelationOther">Other</mat-checkbox>
+                        </section>
+                        
+                       <input *ngIf="form.relation.isRelationOther" type="text">
+                       <br>
+                    </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-sm">First and Last Name</label>
+                        <div style="text-align:left">
+                            <input type="text" [value]="form.name">
+                        </div>
+                    </td>
+                    <td>
+                        <label class="label-sm">Phone Number:</label>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">Country:</label><input type="text">
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-sm">Address:</label>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">City:</label>
+                        <input type="text">
+                    </td>
+                    <td style="width: 120px">
+                        <label class="label-sm">State:</label>
+                        <input type="text">
+                    </td>
+                    <td style="width: 10px">
+                        <label class="label-sm">Zip Code:</label>
+                        <input type="text">
+                    </td>
+                 
+                </tr>
+                    
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header"><label>2. DIAGNOSTIC DETAILS: List all known relevant diagnosis information for the recipient.</label></div>
+        <div class="card-header-inner"><label class="label-in">Comprehensive Diagnostic Evaluation (CDE)</label>
+        </div>
+        <div class="card-body">
+            <div class="d-flex">
+                <div style="width: 400px">
+                    <label>Date of CDE Completion:</label>
+                    <input type="date">
+                </div>
+                <div class="diagonistic w-100 d-flex justify-content-end">
+                    <label>Assessment Type :</label>
+                    <section class="">
+                        <mat-checkbox>ADOS</mat-checkbox>
+                        <mat-checkbox>GARS</mat-checkbox>
+                        <mat-checkbox>ADI</mat-checkbox>
+                        <mat-checkbox>CARS</mat-checkbox>
+                    </section>
+                </div>
+            </div>
+            <table border="1">
+                <tr style="background-color: lightgray;">
+                    <th colspan="2">DSM-5 Diagnosis:</th>
+                    <th colspan="2">ICD-10 Diagnosis:</th>
+                    <th>Primary</th>
+                 </tr>
+                 <tr>
+                     <td>Code</td>
+                     <td>DSM-5 Name</td>
+                     <td>Code</td>
+                     <td>ICD-10 Name</td>
+                     <td></td>                        
+                 </tr>
+                 <tr *ngFor="let item of form.diagnosisHistory">
+                     <td><input type=text></td>
+                     <td><input type=text></td>
+                     <td><input type=text></td>
+                     <td><input type=text></td>
+                     <td><mat-checkbox></mat-checkbox></td>
+                 </tr>
+                </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header"><label class="capital">3. TREATMENT SERVICES REQUIRING PRIOR AUTHORIZATION</label></div>
+            <div class="card-header-inner"><label class="label-in">Behavioral Assessment and Treatment Planning (BATP):</label></div>
+            <table>
+                <tr>
+                    <td class="text-left bold">
+                        <input type="checkbox"> <label class="label-sm">&nbsp;I am requesting in excess of 6 hours of BATP services within 180-day period and have attached a narrative detailing the clinical need.</label>
+                    </td>
+                </tr>
+                <div class="card-header-inner"><label class="label-in">Behavior Analytic Intervention (BAI)</label></div>
+                <tr>
+                    <td class="text-left bold">
+                        <input type="checkbox"> <label class="label-sm">&nbsp;I am requesting the Behavior Analytic Intervention (BAI) services, detailed below, consistent with the recipient’s BATP.</label>
+                    </td>
+                </tr>
+            </table>
+            <table border="1" colspan="4">
+                <tr>
+                    <td style="width: 10%;"><label> Servie Code</label></td>
+                    <td style="width: 40%;"><label>Service Name</label></td>
+                    <td style="width: 20%;"><label>Service Start :</label></td>
+                    <td style="width: 30%;"><label>Service End :</label></td>
+                </tr>
+                <tr>
+                    <td>97153</td>
+                    <td>Adaptive Behavior Treatment by Protocol</td>
+                    <td>Units :<input type="text"></td>
+                    <td rowspan="7">
+                        <div style="border:1px solid black; background:white; width: 100%;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>97154</td>
+                    <td>Group Adaptive Behavior Treatment by Protocol</td>
+                    <td>Units :<input type="text"></td>
+                    
+                </tr>
+                <tr>
+                    <td>97158</td>
+                    <td>Group Adaptive Behavior Treatment w/ Protocol Modification</td>
+                    <td>Units :<input type="text"></td>
+                    
+                </tr>
+                <tr>
+                    <td>97156</td>
+                    <td>Family Adaptive Behavior Treatment Guidance</td>
+                    <td>Units :<input type="text"></td>
+                    
+                </tr>
+                <tr>
+                    <td>97157</td>
+                    <td>Multiple-Family Group Adaptive Behavior Treatment Guidance</td>
+                    <td>Units :<input type="text"></td>
+                    
+                </tr>
+                <tr>
+                    <td>0363T</td>
+                    <td>Adaptive Behavior Treatment w/ Protocol Modification</td>
+                    <td>Units :<input type="text"></td>                    
+                </tr>
+            </table>        
+    </div>
+    
+    <div class="card">
+        <div class="card-header"><label class="capital">4. RECIPIENT’S TREATMENT TEAM</label></div>
+        <div class="card-body">
+            <table border="1">
+                <tr>
+                    <td>
+                        <label class="label-sm">Primary Care Physician:</label>&nbsp;&nbsp;
+                        <input type="text"><br>
+                        <label class="label-sm"> Date of Most Recent Visit:</label>
+                        <input type="date">
+                        <label class="label-sm"> NPI:</label>
+                        <input type="text">
+                       
+                    </td>
+                    <td>
+                        <label class="label-sm">Organization Name</label><br>
+                            <input type="text"><br>
+                            <label class="label-sm">Organization Name</label><br>
+                            <input type="text"><br>
+                            <label class="label-sm">Organization Name</label><br>
+                            <input type="text"><br>
+                         
+                    </td>
+                    <td>
+                        
+                            <label class="label-sm">Contact Name</label><br>
+                            <input type="text"><br>
+                            <label class="label-sm">Contact Name</label><br>
+                            <input type="text"><br>
+                            <label class="label-sm">Contact Name</label><br>
+                            <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">Phone:</label>&nbsp;
+                            <input type="text"><br>
+                            <label class="label-sm">Email:</label>&nbsp;&nbsp;
+                            <input type="text"><br>
+                            <label class="label-sm">Phone:</label>&nbsp;
+                            <input type="text"><br>
+                            <label class="label-sm">Email:</label>&nbsp;&nbsp;
+                            <input type="text"><br>
+                            <label class="label-sm">Phone:</label>&nbsp;
+                            <input type="text"><br>
+                            <label class="label-sm">Email:</label>&nbsp;&nbsp;
+                            <input type="text">
+                    </td>
+                </tr>
+            </table>
+
+
+    </div>
+    <div class="card">
+        <div class="card-header"><label class="capital">5. ATTESTATION AND SIGNATURE</label></div>
+        <div class="card-body">
+            <table border="1">
+                <tr>
+                    <td>
+                        <label class="label-sm">Staff Completing (print name):</label>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">Credentials:</label>
+                        <input type="text">                      
+                    </td>
+                    <td>
+                        <label class="label-sm">Phone Number:</label>
+                        <input type="text">                      
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-sm">Signature:</label>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">Date (mm/dd/yyyy):</label> 
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label-sm">Licensed Provider Name:</label>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">NPI:</label>
+                        <input type="text">
+                    </td>
+                    <td>
+                        <label class="label-sm">Provider ID: </label>
+                        <input type="text">
+                        
+
+                    </td>
+                </tr>
+            </table>
+    </div>   
+</div>
+</div>
